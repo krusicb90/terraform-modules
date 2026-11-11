@@ -35,13 +35,6 @@ flowchart LR
     internet[Internet] -.->|no inbound rules| vm
 ```
 
-## Status
-
-Version 0.1. The Terraform code is validated in CI and tested with plan and
-apply runs against a mocked Cloudflare provider. It has not been applied to a
-real Cloudflare account yet, and the cloud-init script has not been run on a
-real machine. Treat the first run as the integration test.
-
 ## Usage
 
 ```hcl
