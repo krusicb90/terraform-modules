@@ -1,0 +1,14 @@
+#cloud-config
+# Installs cloudflared from Cloudflare's package repository and connects this
+# machine to the tunnel. The machine only makes outbound connections.
+package_update: true
+packages:
+  - ca-certificates
+  - curl
+runcmd:
+  - [mkdir, -p, --mode=0755, /usr/share/keyrings]
+  - [curl, -fsSL, "https://pkg.cloudflare.com/cloudflare-main.gpg", -o, /usr/share/keyrings/cloudflare-main.gpg]
+  - [sh, -c, "echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main' > /etc/apt/sources.list.d/cloudflared.list"]
+  - [apt-get, update]
+  - [apt-get, install, -y, cloudflared]
+  - [cloudflared, service, install, "${token}"]

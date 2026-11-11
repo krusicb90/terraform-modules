@@ -14,14 +14,15 @@ and which trade-offs were made on the way.
 | Module | Cloud | What it answers |
 |--------|-------|-----------------|
 | [aws-backup-restore-drill](modules/aws-backup-restore-drill) | AWS | Does the database backup actually restore, is the data in it recent, and how long does the restore take? |
+| [cloudflare-tunnel-private-access](modules/cloudflare-tunnel-private-access) | Cloudflare | How do people reach a server that has no open inbound ports, and how is that kept safe if someone misconfigures the dashboard? |
 
-Planned next: protection for a legacy application behind Cloudflare, private
-access to a VM through Cloudflare Tunnel, and cost guardrails for Azure.
+Planned next: protection for a legacy application behind Cloudflare, and cost
+guardrails for Azure.
 
 ## What every module has
 
-- **Tests.** Plan tests run with `terraform test` against a mocked provider, so
-  they need no cloud account and run on every pull request.
+- **Tests.** `terraform test` runs against a mocked provider, so the tests need
+  no cloud account and run on every push.
 - **A runnable example** under `examples/`.
 - **A README that explains decisions**, not only inputs and outputs.
 - **A status line** that says how far the module has been verified.
