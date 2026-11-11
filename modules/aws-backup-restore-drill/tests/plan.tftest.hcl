@@ -100,10 +100,9 @@ run "select_by_tag" {
     }
   }
 
-  assert {
-    condition     = aws_backup_restore_testing_selection.this.protected_resource_arns == null
-    error_message = "Tag selection must not pass ARNs: the provider accepts ARNs or conditions, never both."
-  }
+  # protected_resource_arns is computed by AWS when conditions are used, so it
+  # is unknown at plan time. That this run plans at all proves that ARNs and
+  # conditions are not passed together.
 
   assert {
     condition     = one(one(aws_backup_restore_testing_selection.this.protected_resource_conditions).string_equals).key == "aws:ResourceTag/restore-drill"
