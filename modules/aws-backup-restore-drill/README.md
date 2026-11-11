@@ -36,13 +36,6 @@ flowchart LR
     validator -->|failures| sns[SNS topic]
 ```
 
-## Status
-
-Version 0.1. The Terraform code is validated and plan-tested in CI against a
-mocked AWS provider, and the validator has unit tests. It has not been applied
-to a real AWS account yet. Treat the first run in your account as the
-integration test, and read the plan before you apply it.
-
 ## Usage
 
 ```hcl

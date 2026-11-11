@@ -25,7 +25,6 @@ guardrails for Azure.
   no cloud account and run on every push.
 - **A runnable example** under `examples/`.
 - **A README that explains decisions**, not only inputs and outputs.
-- **A status line** that says how far the module has been verified.
 
 CI runs `terraform fmt`, `validate` and `test`, TFLint, Checkov, and the unit
 tests of any code a module ships. Checks that are skipped are listed with a
