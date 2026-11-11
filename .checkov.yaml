@@ -1,0 +1,22 @@
+# Checks that are skipped on purpose. Each one has a reason: a skip without a
+# reason is a finding nobody looked at.
+framework:
+  - terraform
+compact: true
+skip-check:
+  # The restored-instance security group is attached by AWS Backup at restore
+  # time through restore metadata overrides, not by a Terraform resource.
+  - CKV2_AWS_5
+  # Failed asynchronous invocations go to SNS through an on-failure destination
+  # instead of a dead letter queue.
+  - CKV_AWS_116
+  # One EventBridge rule invokes the function a few times per drill. Reserved
+  # concurrency would only take capacity away from the account pool.
+  - CKV_AWS_115
+  # Customer managed keys are optional (kms_key_arn). The environment holds
+  # configuration and a secret ARN, never a secret value.
+  - CKV_AWS_158
+  - CKV_AWS_173
+  # Code signing and X-Ray tracing are out of scope for a small scheduled validator.
+  - CKV_AWS_272
+  - CKV_AWS_50
