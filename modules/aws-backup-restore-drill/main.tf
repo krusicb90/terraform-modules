@@ -43,8 +43,9 @@ resource "aws_backup_restore_testing_selection" "this" {
   restore_testing_plan_name = aws_backup_restore_testing_plan.this.name
   protected_resource_type   = "RDS"
   iam_role_arn              = aws_iam_role.restore.arn
-  protected_resource_arns   = local.select_by_tag ? ["*"] : var.protected_resource_arns
-  validation_window_hours   = var.validation_window_hours
+  # The provider accepts either ARNs or conditions, never both.
+  protected_resource_arns = local.select_by_tag ? null : var.protected_resource_arns
+  validation_window_hours = var.validation_window_hours
 
   dynamic "protected_resource_conditions" {
     for_each = local.select_by_tag ? [1] : []

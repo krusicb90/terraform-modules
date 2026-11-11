@@ -101,8 +101,8 @@ run "select_by_tag" {
   }
 
   assert {
-    condition     = length(aws_backup_restore_testing_selection.this.protected_resource_arns) == 1 && contains(aws_backup_restore_testing_selection.this.protected_resource_arns, "*")
-    error_message = "Tag selection needs the wildcard ARN."
+    condition     = aws_backup_restore_testing_selection.this.protected_resource_arns == null
+    error_message = "Tag selection must not pass ARNs: the provider accepts ARNs or conditions, never both."
   }
 
   assert {
@@ -181,17 +181,8 @@ run "rejects_arns_and_tags_together" {
   ]
 }
 
-run "rejects_no_selection" {
-  command = plan
-
-  variables {
-    protected_resource_arns = []
-  }
-
-  expect_failures = [
-    aws_backup_restore_testing_selection.this,
-  ]
-}
+# Passing neither ARNs nor tags is rejected by the AWS provider itself, before
+# the module's own precondition is evaluated, so there is no run for it here.
 
 run "rejects_sql_checks_without_credentials" {
   command = plan
