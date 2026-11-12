@@ -16,9 +16,6 @@ and which trade-offs were made on the way.
 | [aws-backup-restore-drill](modules/aws-backup-restore-drill) | AWS | Does the database backup actually restore, is the data in it recent, and how long does the restore take? |
 | [cloudflare-tunnel-private-access](modules/cloudflare-tunnel-private-access) | Cloudflare | How do people reach a server that has no open inbound ports, and how is that kept safe if someone misconfigures the dashboard? |
 
-Planned next: protection for a legacy application behind Cloudflare, and cost
-guardrails for Azure.
-
 ## What every module has
 
 - **Tests.** `terraform test` runs against a mocked provider, so the tests need
