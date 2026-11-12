@@ -42,6 +42,7 @@ jobs:
           - aws-backup-restore-drill
           - cloudflare-tunnel-private-access
           - cloudflare-legacy-app-shield
+          - azure-cost-guardrails
     defaults:
       run:
         working-directory: modules/${{ matrix.module }}

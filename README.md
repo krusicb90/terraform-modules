@@ -16,6 +16,7 @@ and which trade-offs were made on the way.
 | [aws-backup-restore-drill](modules/aws-backup-restore-drill) | AWS | Does the database backup actually restore, is the data in it recent, and how long does the restore take? |
 | [cloudflare-tunnel-private-access](modules/cloudflare-tunnel-private-access) | Cloudflare | How do people reach a server that has no open inbound ports, and how is that kept safe if someone misconfigures the dashboard? |
 | [cloudflare-legacy-app-shield](modules/cloudflare-legacy-app-shield) | Cloudflare | How is an application protected when it can no longer be patched? |
+| [azure-cost-guardrails](modules/azure-cost-guardrails) | Azure | Who finds out about unexpected spend, when, and what is prevented outright? |
 
 ## What every module has
 
