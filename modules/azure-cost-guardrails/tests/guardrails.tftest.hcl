@@ -1,5 +1,9 @@
 # Tests against a mocked Azure provider. They need no subscription and create
 # nothing, so they run on every push.
+#
+# Budget notifications reference the action group ID, which Azure generates.
+# The mocked provider can apply for free, so these runs apply and check the
+# finished values. The validation runs at the end only plan.
 
 mock_provider "azurerm" {}
 
@@ -13,7 +17,7 @@ variables {
 }
 
 run "subscription_budget_warns_before_and_after" {
-  command = plan
+  command = apply
 
   assert {
     condition     = azurerm_consumption_budget_subscription.this[0].subscription_id == "/subscriptions/00000000-1111-2222-3333-444444444444"
@@ -42,7 +46,7 @@ run "subscription_budget_warns_before_and_after" {
 }
 
 run "everyone_is_notified_through_one_action_group" {
-  command = plan
+  command = apply
 
   assert {
     condition     = length(azurerm_monitor_action_group.cost.email_receiver) == 2
@@ -56,7 +60,7 @@ run "everyone_is_notified_through_one_action_group" {
 }
 
 run "policies_report_before_they_deny" {
-  command = plan
+  command = apply
 
   assert {
     condition     = length(azurerm_subscription_policy_assignment.required_tag) == 2
@@ -80,7 +84,7 @@ run "policies_report_before_they_deny" {
 }
 
 run "policies_deny_when_enforced" {
-  command = plan
+  command = apply
 
   variables {
     enforce_policies = true
@@ -109,7 +113,7 @@ run "policies_deny_when_enforced" {
 }
 
 run "resource_group_budgets_are_independent" {
-  command = plan
+  command = apply
 
   variables {
     subscription_budget = null
@@ -143,7 +147,7 @@ run "resource_group_budgets_are_independent" {
 }
 
 run "virtual_machines_shut_down_in_the_evening" {
-  command = plan
+  command = apply
 
   variables {
     vm_shutdown_time     = "1830"
@@ -168,7 +172,7 @@ run "virtual_machines_shut_down_in_the_evening" {
 }
 
 run "optional_parts_can_be_switched_off" {
-  command = plan
+  command = apply
 
   variables {
     subscription_budget   = null
