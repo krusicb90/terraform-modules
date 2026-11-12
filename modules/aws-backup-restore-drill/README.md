@@ -140,7 +140,7 @@ module small and lets you pin the driver version yourself.
 connection. It verifies the server certificate when you pass the RDS CA bundle
 with `db_ca_bundle_file`. Without it the connection is encrypted but not
 verified. That is acceptable between two security groups that only talk to each
-other, and it is still stated here so that it is a decision and not a surprise.
+other.
 
 ## Cost
 
@@ -149,7 +149,7 @@ until AWS Backup deletes it after `validation_window_hours`. Use
 `restore_instance_class` to restore into a smaller instance class than
 production. The function, the metrics and the logs cost cents per month.
 
-## Limitations
+## Scope
 
 - RDS instances only. Aurora clusters restore as clusters and need different
   restore metadata.

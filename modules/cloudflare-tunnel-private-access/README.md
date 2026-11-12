@@ -134,15 +134,14 @@ yourself. The simplest way to rotate the token is to replace the tunnel.
 Both outputs are marked sensitive, but they are stored in the Terraform state.
 Protect the state accordingly.
 
-## Limitations
+## Scope
 
 - Identities are email addresses and email domains. Identity provider groups
   are not supported yet.
 - SSH needs cloudflared on the client. Browser-rendered SSH is not configured.
-- Origin verification is on for every service type by default. It is
-  documented by Cloudflare for HTTP services. If an SSH or TCP service does not
-  connect, set `verify_access_at_origin = false` for that service. Access in
-  front of the hostname stays in place.
+- Origin verification can be turned off per service with
+  `verify_access_at_origin = false`. Access in front of the hostname stays in
+  place.
 - All hostnames must be in one zone.
 - The `cloud_init` output targets Debian and Ubuntu.
 
